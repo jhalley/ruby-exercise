@@ -51,7 +51,8 @@ namespace :geckobots do
   desc "Get weather at Chelsea FC"
   task :chelseafc_weather, :environment do |t, args|
     weather_now = Weather.lookup(35854, units = 'c')
-    Rake::Task['geckobots:write_tweet'].invoke("#{weather_now.title} - #{weather_now.condition.temp} deg - #{weather_now.condition.text}")
+    #puts "[" + Time.now.getutc.inspect  + "] #{weather_now.title} - #{weather_now.condition.temp} deg - #{weather_now.condition.text}"
+    Rake::Task['geckobots:write_tweet'].invoke("[" + Time.now.getutc.inspect  + "] #{weather_now.title} - #{weather_now.condition.temp} deg - #{weather_now.condition.text}")
   end
 
 end
