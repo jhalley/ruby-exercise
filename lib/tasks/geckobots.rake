@@ -33,10 +33,17 @@ namespace :geckobots do
     client.update("#{args.msg}")
   end
 
+  desc "Write reverse tweet"
+  task :write_reverse_tweet, [:msg] => :environment do |t, args|
+    args.with_defaults(:msg => 'Ole!')
+    reversed_msg = args.msg.dup
+    client.update("#{reversed_msg.reverse!}")
+  end
+
   desc "Chelsea FC Retweeter"
   task :chelseafc_retweeter, :environment do |t, args|
     client.search("chelseafc", :result_type => "recent").take(1).each do |tweet|
-      Rake::Task['geckobots:write_tweet'].invoke(tweet.text)
+      Rake::Task['geckobots:write_reverse_tweet'].invoke(tweet.text)
     end
   end
 end
